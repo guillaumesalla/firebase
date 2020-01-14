@@ -1,2 +1,1 @@
-# ynov-b3-firebase
-Ynov B3 Web - Firebase usage project
+salut et bienvenu sur le GIT de TrocService 
