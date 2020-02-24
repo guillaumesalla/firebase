@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import React, { useState } from "react";
-import logo from "./public/logo(1).png.";
+import logo from "./trocLogo.png";
 
 const reportError = error => {
   console.error(error);
@@ -8,6 +8,7 @@ const reportError = error => {
 };
 
 function SignIn() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isSignUp, setIsSignUp] = useState(false);
@@ -26,12 +27,28 @@ function SignIn() {
       .then(res => {
         console.log("User created");
         res.user
+          .updateProfile({
+            displayName: name
+          })
+          .then(() => console.log("Display name set"))
+          .catch(error => reportError(error));
       })
       .catch(error => reportError(error));
   };
   return (
     <header className="App-header">
       <img src={logo} className="App-logo" alt="logo" />
+      {isSignUp ? (
+        <input
+          type="text"
+          placeholder="Name"
+          value={name}
+          onChange={evt => setName(evt.target.value)}
+          style={{ marginBottom: "16px" }}
+        />
+      ) : (
+          undefined
+        )}
       <input
         type="text"
         placeholder="Email"

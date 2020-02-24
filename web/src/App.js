@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import React from "react";
-import logo from "./logo.svg";
+import logo from "./trocLogo.png";
 import "./App.css";
 import SignIn from "./SignIn";
 
@@ -33,7 +33,7 @@ class App extends React.Component {
           }
         });
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.error(error);
       });
   }
@@ -59,8 +59,8 @@ class App extends React.Component {
             <button onClick={this.signOut}>Sign Out</button>
           </header>
         ) : (
-          <SignIn />
-        )}
+              <SignIn />
+            )}
       </div>
     );
   }
