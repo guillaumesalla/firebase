@@ -14,8 +14,8 @@ exports.addTroc = functions.region("europe-west1").https.onRequest(async (req, r
 
 exports.getTroc = functions.region("europe-west1").https.onRequest(async (req, res) => {
 
-
-    res.send("get troc");
+    const writeResult = await admin.firestore().collection('Troc').get();
+    res.json({ status: `Troc with ID: ${writeResult.id}.` });
 });
 
 exports.addUser = functions.region("europe-west1").https.onRequest(async (req, res) => {
