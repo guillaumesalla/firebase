@@ -3,6 +3,11 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 admin.initializeApp();
 
+// CORS Express middleware to enable CORS Requests.
+const cors = require("cors")({
+    origin: true
+});
+
 exports.addTroc = functions.region("europe-west1").https.onRequest(async (req, res) => {
     // Grab the parameters.
     const troc = req.body
@@ -12,15 +17,14 @@ exports.addTroc = functions.region("europe-west1").https.onRequest(async (req, r
     res.json({ status: `Troc with ID: ${writeResult.id} added.` });
 });
 
-exports.getTroc = functions.region("europe-west1").https.onRequest(async (req, res) => {
+exports.getTrocs = functions.region("europe-west1").https.onRequest(async (req, res) => {
+    return cors(req, res, async () => {
+        const writeResult = await admin.firestore().collection('Troc').get();
+        const result = []
+        writeResult.forEach(item => result.push(item.data()))
+        res.json(result);
+    })
 
-    const writeResult = await admin.firestore().collection('Troc').get();
-    res.json({ status: `Troc with ID: ${writeResult.id}.` });
-});
-
-exports.addUser = functions.region("europe-west1").https.onRequest(async (req, res) => {
-
-    res.send("add user");
 });
 
 exports.getUsers = functions.region("europe-west1").https.onRequest(async (req, res) => {
