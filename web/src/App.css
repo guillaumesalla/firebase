@@ -1,9 +1,12 @@
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 8vmin;
   pointer-events: none;
   padding-bottom: 20px;
 }
@@ -16,13 +19,15 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   font-size: calc(10px + 2vmin);
   color: white;
+  padding: 16px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .App-link {
@@ -39,7 +44,33 @@
 }
 
 a {
-  color: #fff;
+  color: #222;
   text-decoration: none;
   font-size: 0.8em;
+<<<<<<< HEAD
 }
+=======
+}
+
+.App-header a {
+  color: #fff;
+}
+
+.App-body {
+  color: #222;
+  flex: 1;
+  display: flex;
+}
+
+.App-loading,
+.App-rooms {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: "center";
+}
+
+.App-rooms {
+  flex-direction: column;
+}
+>>>>>>> 70ebb4ed3b6ab59ab41391416473d1e2bbc05bd8

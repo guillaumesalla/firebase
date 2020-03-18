@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+<<<<<<< HEAD
 import React, { useState } from "react";
 import logo from "./trocLogo.png";
 import "./App.css";
@@ -9,12 +10,35 @@ import {
   Route,
   Link
 } from "react-router-dom";
+=======
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import logo from "./logo.svg";
+import "./App.css";
+import SignIn from "./SignIn";
+import Chat from "./Chat/Chat";
+>>>>>>> 70ebb4ed3b6ab59ab41391416473d1e2bbc05bd8
 import Axios from "axios";
 
-const Loading = props => (
-  <header className="App-header">
+const Loading = () => (
+  <div className="App-loading">
     <img src={logo} className="App-logo" alt="logo" />
-  </header>
+  </div>
+);
+
+const Rooms = props => (
+  <div className="App-rooms">
+    <span>Sélectionnez une chat room :</span>
+    {props.rooms.map(room => (
+      <Link to={`/room/${room.id}`}>
+        <span>
+          {room.name} ({room.nbMessages} messages)
+        </span>
+      </Link>
+    ))}
+  </div>
 );
 
 class App extends React.Component {
@@ -22,7 +46,9 @@ class App extends React.Component {
     super(props);
     this.state = {
       user: null,
-      isLoading: true
+      isLoading: true,
+      token: "",
+      rooms: []
     };
   }
 
@@ -33,6 +59,19 @@ class App extends React.Component {
       .then(() => {
         firebase.auth().onAuthStateChanged(user => {
           console.log("Auth changed: ", user);
+          if (firebase.auth().currentUser) {
+            firebase
+              .auth()
+              .currentUser.getIdToken()
+              .then(token => {
+                console.log("User token : ", token);
+                if (this.state.token !== token) {
+                  this.setState({
+                    token
+                  });
+                }
+              });
+          }
           if (user) {
             this.setState({ user, isLoading: false });
           } else {
@@ -43,6 +82,13 @@ class App extends React.Component {
       .catch(function (error) {
         console.error(error);
       });
+    this.getRooms();
+  }
+
+  getRooms() {
+    Axios.get("https://europe-west1-ynovb3web.cloudfunctions.net/getRooms")
+      .then(response => this.setState({ rooms: response.data.rooms }))
+      .catch(error => console.error(error));
   }
 
   signOut() {
@@ -54,11 +100,10 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
-        {this.state.isLoading ? (
-          <Loading />
-        ) : this.state.user ? (
+      <Router>
+        <div className="App">
           <header className="App-header">
+<<<<<<< HEAD
             <Router>
               <div>
                 <nav>
@@ -101,6 +146,48 @@ class App extends React.Component {
               <SignIn />
             )}
       </div>
+=======
+            <Link to="/">
+              <img src={logo} className="App-logo" alt="logo" />
+            </Link>
+            <span>
+              Welcome{" "}
+              {this.state.user &&
+                (this.state.user.displayName || this.state.user.email)}
+              !
+            </span>
+            <a
+              href="#"
+              onClick={e => {
+                this.signOut();
+                e.preventDefault();
+              }}
+            >
+              <FontAwesomeIcon icon={faSignOutAlt} />
+            </a>
+          </header>
+          <div class="App-body">
+            {this.state.isLoading ? (
+              <Loading />
+            ) : this.state.user ? (
+              <Switch>
+                <Route path="/room/:roomId">
+                  <Chat
+                    messages={this.state.messages}
+                    token={this.state.token}
+                  />
+                </Route>
+                <Route path="/">
+                  <Rooms rooms={this.state.rooms} />
+                </Route>
+              </Switch>
+            ) : (
+              <SignIn />
+            )}
+          </div>
+        </div>
+      </Router>
+>>>>>>> 70ebb4ed3b6ab59ab41391416473d1e2bbc05bd8
     );
   }
 }
