@@ -88,7 +88,7 @@ class App extends React.Component {
                     <AddTroc />
                   </Route>
                   <Route path="/users">
-                    <GetUsers />
+                    <Users />
                   </Route>
                   <Route path="/">
                     <Home />
@@ -120,20 +120,45 @@ class Trocs extends React.Component {
   }
   render() {
     return <div><h2>Trocs</h2>
-      {
-        this.state.data.map(item => <div> {item.photo} </div>)
-      }
-    </div>;
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Service Demandé</th>
+            <th scope="col">Service Proposé</th>
+            <th scope="col">Photo</th>
+          </tr>
+        </thead>
+        {this.state.data.map(item =>
+          <tbody>
+            <tr>
+              <td>{item.servicedemande}</td>
+              <td>{item.servicepropose}</td>
+              <td><img src={item.photo} class="img-fluid" alt="Responsive image" width="100px" height="100px"></img></td>
+            </tr>
+          </tbody>
+        )}
+      </table>
+    </div>
   }
-
 }
 
 function AddTroc() {
   return <h2>Ajouter un trocs</h2>;
 }
 
-function GetUsers() {
-  return <h2>Liste des users</h2>;
+class Users extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { data: [] }
+  }
+  componentDidMount() {
+    Axios.get("https://europe-west1-trocservices-7b189.cloudfunctions.net/getUsers")
+      .then(response => this.setState({ data: response.data }))
+  }
+  render() {
+    return <div><h2>Utilisateurs</h2>
+      {this.state.data.map(item => { item.name })}
+    </div>
+  }
 }
-
 export default App;

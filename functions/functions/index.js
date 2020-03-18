@@ -24,11 +24,14 @@ exports.getTrocs = functions.region("europe-west1").https.onRequest(async (req, 
         writeResult.forEach(item => result.push(item.data()))
         res.json(result);
     })
-
 });
 
 exports.getUsers = functions.region("europe-west1").https.onRequest(async (req, res) => {
-
-    res.send("get users");
+    return cors(req, res, async () => {
+        const writeResult = await admin.auth().listUsers();
+        const result = []
+        writeResult.forEach(item => result.push(item.data()))
+        res.json(result);
+    })
 });
 
