@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+.main{
+	--background-color: #8d93b1;
+	/*--background-color: #67729f;*/
+	--standard-bleu: #2f4578;
+	--bleu-fonce: #141e34;
+	--rouge: #b23b3b;
+	margin: 0px;
+	margin-top: 0px;
+	padding-top: 0vh;
+	padding-left: 0vh;
+	font-family: 'Segoe UI', sans-serif;
+	background: no-repeat url('backgroundreduit.png')/*, linear-gradient(rgba(103, 114, 159, 0.5), rgba(103, 114, 159, 0.5))*/;
+	background-color: var(--background-color);
+	background-attachment: fixed;
+	background-position: bottom right;
+}
+#side_menu{
+	color: white;
+	width: 17%;
+	height: 100vh;
+	background-color: var(--standard-bleu);
+	position: fixed;
+}
+input {
+    display: none;
+}
+
+label:before {
+    content: '';
+    display: inline-block;
+    height: 10px;
+    width: 10px;
+    background: var(--bleu-fonce);
+    border-radius: 50%;
+    z-index: 2;
+    transition: box-shadow .4s ease,
+                    background .3s ease;
+}
+
+input:checked + label:before {
+    box-shadow: inset 0px 0px 0 2px rgba(20,30,52,1);
+    background: var(--rouge);
+}
+
+.Title{
+	padding-top: 10px;
+	text-align:center;
+}
+
+.dots{
+	padding-left: 5%;
+}
+
+.les_labels{
+	display: block;
+	font-size: 20px;
+	text-align: center;
+}
+
+.labels{
+	margin: 10px;
+	width: 100px;
+}
+
+.tri{
+	padding-top: 5px;
+	float: right;
+	border-style: solid;
+	border-color: var(--standard-bleu);
+	color: var(--standard-bleu);
+	height: 50px;
+	width: 83%;
+
+
+	display: grid;
+	grid-template-columns: repeat(8, 1fr);
+	grid-gap: 0px;
+	grid-auto-rows: minmax(auto, auto);
+}
+.trier {
+  grid-column: 1;
+  grid-row: 1;
+}
+.ajouter{
+	grid-column: 7;
+	grid-row: 1;
+	margin-top: auto;
+    margin-bottom: auto;
+}
+.retirer{
+	grid-column: 8;
+	grid-row: 1;
+	margin-top: auto;
+    margin-bottom: auto;
+}
+.roll {
+  grid-column: 2;
+  grid-row: 1;
+}
+.optionroll {
+	margin-top: 5px;
+	border-color: var(--standard-bleu);
+	color: var(--standard-bleu);
+	font-family: "'Segoe UI', sans-serif";
+}
+.annonces{
+	float: right;
+	height: auto;
+	width: 75%;
+	text-align: center;
+	margin-right: 5vh;
+}
+
+.cellules{
+	border-style: solid;
+	border-color: var(--standard-bleu);
+	border-radius: 20px;
+}
+
+.centre{
+	padding-left: 5vh;
+	padding-top: 5vh;
+	padding-right: 5vh;
+	width: 83%;
+	float: right;
+	text-align: right;
+}
+
+.inscription{
+	float: right;
+	height: auto;
+	width: 83%;
+}
+.formulaire{
+	margin: auto auto;
+}
+.elements{
+	height: 36px;
+	width: 250px;
+	padding: 0px 12px;
+	border-radius:25px;
+	background-color:#8d93b1;
+	border-color:#2f4578;
+	border-style: solid;
+	color: #2f4578;
+	font-family: 'Segoe UI', sans-serif;
+}
+
+.master_div{
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.div_cent{
+	margin: 0 auto;
+	width: 254px;
+
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+.div_centre{
+	display: grid;
+	justify-content: center;
+	align-items: center;
+}
